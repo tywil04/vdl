@@ -1,0 +1,83 @@
+using Gtk 4.0;
+using Adw 1;
+
+Adw.Window main-window {
+  title: "";
+  default-width: 600;
+  default-height: 500;
+  width-request: 600;
+  height-request: 500;
+  modal: true;
+
+  Adw.ToolbarView main-view {
+    [top]
+    Adw.HeaderBar titlebar {}
+
+    content: Adw.StatusPage {
+      title: _("VSCode & Distrobox Launcher");
+      description: _("Launch a directory in a distrobox container!");
+
+      Adw.Clamp {
+        maximum-size: 450;
+        margin-start: 10;
+        margin-end: 10;
+
+        Box {
+          orientation: vertical;
+
+          ListBox {
+            selection-mode: none;
+
+            styles [
+              "boxed-list",
+            ]
+
+            Adw.ComboRow containers-row {
+              title: _("Distrobox Container");
+              enable-search: true;
+              use-subtitle: true;
+
+              styles [
+                "property",
+              ]
+            }
+
+            Adw.EntryRow directory-row {
+              title: _("Directory");
+              activates-default: false;
+              show-apply-button: false;
+
+              Button directory-open-button {
+                valign: center;
+                halign: end;
+                icon-name: 'folder-open-symbolic';
+
+                styles [
+                  "flat",
+                ]
+              }
+            }
+          }
+
+          Box {
+            orientation: horizontal;
+            halign: center;
+
+            Button start-button {
+              label: _("Start");
+              margin-end: 10;
+
+              styles [
+                "suggested-action",
+              ]
+            }
+
+            Button cancel-button {
+              label: _("Cancel");
+            }
+          }
+        }
+      }
+    };
+  }
+}

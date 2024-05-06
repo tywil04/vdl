@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <object class="AdwWindow" id="main-window">
+    <property name="title"></property>
+    <property name="default-width">600</property>
+    <property name="default-height">500</property>
+    <property name="width-request">600</property>
+    <property name="height-request">500</property>
+    <property name="modal">true</property>
+    <child>
+      <object class="AdwToolbarView" id="main-view">
+        <child type="top">
+          <object class="AdwHeaderBar" id="titlebar"></object>
+        </child>
+        <property name="content">
+          <object class="AdwStatusPage">
+            <property name="title" translatable="true">VSCode &amp; Distrobox Launcher</property>
+            <property name="description" translatable="true">Launch a directory in a distrobox container!</property>
+            <child>
+              <object class="AdwClamp">
+                <property name="maximum-size">450</property>
+                <property name="margin-start">10</property>
+                <property name="margin-end">10</property>
+                <child>
+                  <object class="GtkBox">
+                    <property name="orientation">1</property>
+                    <child>
+                      <object class="GtkListBox">
+                        <property name="selection-mode">0</property>
+                        <style>
+                          <class name="boxed-list"/>
+                        </style>
+                        <child>
+                          <object class="AdwComboRow" id="containers-row">
+                            <property name="title" translatable="true">Distrobox Container</property>
+                            <property name="enable-search">true</property>
+                            <property name="use-subtitle">true</property>
+                            <style>
+                              <class name="property"/>
+                            </style>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="AdwEntryRow" id="directory-row">
+                            <property name="title" translatable="true">Directory</property>
+                            <property name="activates-default">false</property>
+                            <property name="show-apply-button">false</property>
+                            <child>
+                              <object class="GtkButton" id="directory-open-button">
+                                <property name="valign">3</property>
+                                <property name="halign">2</property>
+                                <property name="icon-name">folder-open-symbolic</property>
+                                <style>
+                                  <class name="flat"/>
+                                </style>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="orientation">0</property>
+                        <property name="halign">3</property>
+                        <child>
+                          <object class="GtkButton" id="start-button">
+                            <property name="label" translatable="true">Start</property>
+                            <property name="margin-end">10</property>
+                            <style>
+                              <class name="suggested-action"/>
+                            </style>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="cancel-button">
+                            <property name="label" translatable="true">Cancel</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </property>
+      </object>
+    </child>
+  </object>
+</interface>
