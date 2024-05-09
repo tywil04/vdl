@@ -15,7 +15,7 @@ import (
 	"vdl/internal/pkg/vscode"
 )
 
-const appName = "co.uk.tylerw.vdl"
+const appName = "uk.co.tylerw.vdl"
 
 //go:embed ui.ui
 var ui string
@@ -41,39 +41,40 @@ func main() {
 		containersComboList := gtk.NewStringList(containers)
 		containersCombo.SetModel(containersComboList)
 
-		var selectedContainer = containers[0]
-		containersCombo.Connect("notify::selected", func() {
-			selectedContainer = containersCombo.SelectedItem().Cast().(*gtk.StringObject).String()
-		})
-
-		var selectedDirectory string
 		directoryOpen.Connect("clicked", func() {
 			directoryDialog := gtk.NewFileChooserNative("Select a Directory", &window.Window, gtk.FileChooserActionSelectFolder, "Select", "Cancel")
 			directoryDialog.Connect("response", func() {
-				selectedDirectory = directoryDialog.File().Path()
-				directoryEntry.SetText(selectedDirectory)
+				directoryEntry.SetText(directoryDialog.File().Path())
 			})
 			directoryDialog.Show()
 		})
 
 		startButton.Connect("clicked", func() {
-			if selectedContainer == "" || strings.TrimSpace(selectedDirectory) == "" {
-				log.Println("container or directory not selected")
-			}
+			go func() {
+				selectedContainer := containersCombo.SelectedItem().Cast().(*gtk.StringObject).String()
+				selectedDirectory := directoryEntry.Text()
 
-			containerId := distrobox.GetContainerId(selectedContainer)
+				if selectedContainer == "" || strings.TrimSpace(selectedDirectory) == "" {
+					log.Println("container or directory not selected")
+					return
+				}
 
-			err := distrobox.StartContainer(selectedContainer)
-			if err != nil {
-				log.Println("distrobox ", err)
-			}
+				window.Hide()
 
-			err = vscode.OpenContainer(containerId, selectedDirectory)
-			if err != nil {
-				log.Println("vscode ", err)
-			}
+				containerId := distrobox.GetContainerId(selectedContainer)
 
-			os.Exit(1)
+				err := distrobox.StartContainer(selectedContainer)
+				if err != nil {
+					log.Println("distrobox ", err)
+				}
+
+				err = vscode.OpenContainer(containerId, selectedDirectory)
+				if err != nil {
+					log.Println("vscode ", err)
+				}
+
+				os.Exit(0)
+			}()
 		})
 
 		cancelButton.Connect("clicked", func() {

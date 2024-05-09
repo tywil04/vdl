@@ -3,9 +3,9 @@ using Adw 1;
 
 Adw.Window main-window {
   title: "";
-  default-width: 600;
+  default-width: 340;
   default-height: 500;
-  width-request: 600;
+  width-request: 340;
   height-request: 500;
   modal: true;
 
@@ -16,11 +16,11 @@ Adw.Window main-window {
     content: Adw.StatusPage {
       title: _("VSCode & Distrobox Launcher");
       description: _("Launch a directory in a distrobox container!");
+      margin-start: 10;
+      margin-end: 10;
 
       Adw.Clamp {
         maximum-size: 450;
-        margin-start: 10;
-        margin-end: 10;
 
         Box {
           orientation: vertical;

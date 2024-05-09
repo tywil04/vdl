@@ -10,7 +10,7 @@ import (
 func findExecutable() ([]string, error) {
 	out, err := exec.Command("which", "code").Output()
 	if err == nil {
-		return []string{string(out)}, nil
+		return []string{strings.TrimSpace(string(out))}, nil
 	}
 
 	fOut, err := exec.Command("flatpak", "list").Output()

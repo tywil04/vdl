@@ -3,9 +3,9 @@
   <requires lib="gtk" version="4.0"/>
   <object class="AdwWindow" id="main-window">
     <property name="title"></property>
-    <property name="default-width">600</property>
+    <property name="default-width">340</property>
     <property name="default-height">500</property>
-    <property name="width-request">600</property>
+    <property name="width-request">340</property>
     <property name="height-request">500</property>
     <property name="modal">true</property>
     <child>
@@ -17,11 +17,11 @@
           <object class="AdwStatusPage">
             <property name="title" translatable="true">VSCode &amp; Distrobox Launcher</property>
             <property name="description" translatable="true">Launch a directory in a distrobox container!</property>
+            <property name="margin-start">10</property>
+            <property name="margin-end">10</property>
             <child>
               <object class="AdwClamp">
                 <property name="maximum-size">450</property>
-                <property name="margin-start">10</property>
-                <property name="margin-end">10</property>
                 <child>
                   <object class="GtkBox">
                     <property name="orientation">1</property>
